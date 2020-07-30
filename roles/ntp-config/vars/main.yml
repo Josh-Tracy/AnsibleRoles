@@ -1,0 +1,3 @@
+---
+# vars file for /etc/ansible/roles/ntp-config
+ntp_server: 1.1.1.1

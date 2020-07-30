@@ -1,0 +1,27 @@
+---
+# tasks file for /etc/ansible/roles/firewalld
+- name: Install firewalld if not Installed
+  become: yes
+  yum:
+    name: firewalld
+    state: present
+
+- name: Start and Enabled firewalld
+  become: yes
+  service:
+    name: firewalld
+    state: started
+    enabled: yes
+
+- name: Open a port in firewalld
+  become: yes
+  firewalld:
+    port: 443/tcp
+    permanent: yes
+    state: enabled
+
+- name: Restart firewalld
+  become: yes
+  service: 
+    name: firewalld
+    state: restarted

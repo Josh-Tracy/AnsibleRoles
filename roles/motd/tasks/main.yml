@@ -1,0 +1,10 @@
+---
+# tasks file for /etc/ansible/roles/motd
+- name: set motd
+  become: yes
+  template:
+    src: /etc/ansible/roles/motd/files/motd.j2
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: 0444

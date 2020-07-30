@@ -1,0 +1,28 @@
+---
+# tasks file for /etc/ansible/roles/ntp-config
+- name: Install chrony if note installed
+  become: yes
+  yum:
+    name: chrony
+    state: present
+
+- name: Start and Enable chronyd
+  become: yes
+  service:
+    name: chronyd
+    state: started
+    enabled: yes
+
+- name: add ntp server to /etc/chrony.conf
+  become: yes
+  lineinfile:
+    dest: /etc/chrony.conf
+    line: "Server {{ ntp_server }}"
+    state: present
+
+- name: restart chronyd
+  become: yes
+  service:
+    name: chronyd
+    state: restarted
+    enabled: yes

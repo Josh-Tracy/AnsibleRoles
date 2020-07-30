@@ -1,0 +1,14 @@
+---
+# tasks file for /etc/ansible/roles/hostname
+- name: Set Hostname
+  become: yes
+  hostname:
+    name: "{{ inventory_hostname }}"
+
+- name: edit /etc/hosts
+  become: yes
+  lineinfile:
+    dest: /etc/hosts
+    line: "{{ ansible_facts.default_ipv4.address }} {{ ansible_facts.hostname }}.{{ ansible_facts.fqdn }}"
+    regexp: "^127.0.0.1"
+    state: present
