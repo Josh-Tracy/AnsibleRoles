@@ -3,7 +3,7 @@
 - name: set motd
   become: yes
   template:
-    src: /var/lib/jenkins/workspace/ansible-role-updates/roles/motd/files/motd.j2
+    src: files/motd.j2
     dest: /etc/motd
     owner: root
     group: root
